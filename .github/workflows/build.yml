@@ -21,15 +21,15 @@ jobs:
         with:
           channel: 'stable'
 
-      - name: Build APK
+      - name: Build Release APK
         run: |
           flutter create --org com.dirkhata.app --project-name dirkhata app_runner
           cd app_runner
           flutter pub add intl url_launcher
           cp ../lib/main.dart lib/main.dart
-          flutter build apk --debug
+          flutter build apk --release --no-tree-shake-icons
 
       - uses: actions/upload-artifact@v4
         with:
           name: Dirkhata-App
-          path: app_runner/build/app/outputs/flutter-apk/app-debug.apk
+          path: app_runner/build/app/outputs/flutter-apk/app-release.apk
